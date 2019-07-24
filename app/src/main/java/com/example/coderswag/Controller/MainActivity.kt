@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coderswag.Adapters.CategoryAdapter
+import com.example.coderswag.Adapters.CategoryRecyclerAdapter
 import com.example.coderswag.Model.Category
 import com.example.coderswag.R
 import com.example.coderswag.Services.DataService
@@ -13,14 +15,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var adapter  : CategoryAdapter
+    lateinit var adapter  : CategoryRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = CategoryAdapter(this, DataService.categories)
+        adapter = CategoryRecyclerAdapter(this, DataService.categories)
         categoryListView.adapter = adapter
+
+        val layoutManager = LinearLayoutManager(this)
+        categoryListView.layoutManager = layoutManager
+        categoryListView.setHasFixedSize(true)
+
 
     }
 
